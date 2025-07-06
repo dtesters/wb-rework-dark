@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- THE NTTS BLUE THEME PALETTE --- */
+
+:root {
+  /* Light Theme Palette */
+  --color-background: #F3F4F6;
+  --color-primary: #FFFFFF;
+  --color-accent: #3b82f6;
+  --color-text-main: #111827;
+  --color-text-secondary: #6B7280;
+  --color-border-color: #E5E7EB;
+}
+
+.dark {
+  /* This is our official "NTTS Blue Theme" */
+  --color-background: #0D1117;
+  --color-primary: #161B22;
+  --color-accent: #58A6FF;
+  --color-text-main: #C9D1D9;
+  --color-text-secondary: #8B949E;
+  --color-border-color: #30363D;
+}
+
+/* Base styles that use our CSS variables */
+body {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-text-main));
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+
+/* === More Powerful and Specific Styles to Override the Defaults === */
+
+/* Use html.dark to ensure high specificity */
+html.dark body {
+  /* A more noticeable gradient for the NTTS Blue Theme background */
+  background-image: radial-gradient(at 15% 15%, rgb(var(--color-accent) / 0.2), transparent 70%),
+                    radial-gradient(at 85% 95%, rgb(var(--color-primary) / 0.2), transparent 70%);
+}
+
+/* Target links inside the main content area to override default link styles */
+html.dark main a {
+  color: rgb(var(--color-accent));
+  text-decoration-color: rgb(var(--color-accent) / 0.5);
+}
+html.dark main a:hover {
+  text-decoration-color: rgb(var(--color-accent));
+}
+
+/* Override the active item in the sidebar */
+html.dark .nextra-sidebar a.nx-text-primary-600 {
+    color: rgb(var(--color-accent)) !important; /* Use !important to force the override */
+    border-color: rgb(var(--color-accent)) !important;
+}
+
+/* Override headings on documentation pages */
+html.dark main h1, html.dark main h2, html.dark main h3 {
+  color: rgb(var(--color-text-main));
+}
+
+/* --- Keep these utility styles --- */
+[data-reach-skip-link] {
+  @apply sr-only;
+}
+
+[data-reach-skip-link]:focus {
+  @apply not-sr-only fixed ml-6 top-0 bg-white text-lg px-6 py-2 mt-2 outline-none focus:ring z-50;
+}
